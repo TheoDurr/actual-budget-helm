@@ -5,8 +5,11 @@ metadata:
   name: {{ include "actual-budget.fullname" . }}-data
   labels:
     {{- include "actual-budget.labels" . | nindent 4 }}
-  {{- with .Values.persistence.annotations }}
   annotations:
+  {{- if $dataStorage.keepPvc }}
+    "helm.sh/resource-policy": keep
+  {{- end }}
+  {{- with .Values.persistence.annotations }}
     {{- toYaml . | nindent 6 }}
   {{- end }}
 spec:

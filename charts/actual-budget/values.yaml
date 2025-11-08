@@ -81,6 +81,8 @@ persistence:
     - ReadWriteOnce
   # PVC size
   size: 5Gi
+  # If true, keep the PVC on Helm uninstall
+  keepPvc: false
 
 login:
   # Change the default auth method for Actual
