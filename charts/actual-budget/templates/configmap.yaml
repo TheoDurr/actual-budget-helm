@@ -6,6 +6,14 @@ metadata:
     {{- include "actual-budget.labels" . | nindent 4 }}
 data:
   ACTUAL_PORT: {{ .Values.service.port | quote }}
-  ACTUAL_DATA_DIR: {{ .Values.data.rootDirectory | default "/data" | quote }}
-  ACTUAL_USER_FILES: {{ .Values.data.userFiles | default "/data/user-files" | quote }}
-  ACTUAL_SERVER_FILES: {{ .Values.data.serverFiles | default "/data/server-files" | quote }}
+  ACTUAL_DATA_DIR: {{ .Values.data.rootDirectory | default "/data" }}
+  ACTUAL_USER_FILES: {{ .Values.data.userFiles | default "/data/user-files" }}
+  ACTUAL_SERVER_FILES: {{ .Values.data.serverFiles | default "/data/server-files" }}
+  ACTUAL_LOGIN_METHOD: {{ .Values.login.defaultMethod | default "password" }}
+  ACTUAL_ALLOWED_LOGIN_METHODS: {{ .Values.login.allowedMethods | join "," }}
+  ACTUAL_OPENID_ENFORCE: {{ .Values.login.openid.enforce | quote }}
+  ACTUAL_OPENID_AUTH_METHOD: {{ .Values.login.openid.authMethod }}
+  ACTUAL_OPENID_PROVIDER_NAME: {{ .Values.login.openid.providerName }}
+  ACTUAL_OPENID_DISCOVERY_URL: {{ .Values.login.openid.discoveryUrl }}
+  ACTUAL_OPENID_SERVER_HOSTNAME: {{ .Values.login.openid.serverHostname }}
+  ACTUAL_TOKEN_EXPIRATION: {{ .Values.login.openid.tokenExpiration | quote }}

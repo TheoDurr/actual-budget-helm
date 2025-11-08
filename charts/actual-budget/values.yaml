@@ -82,6 +82,44 @@ persistence:
   # PVC size
   size: 5Gi
 
+login:
+  # Change the default auth method for Actual
+  # Allowed values: password, header, openid
+  defaultMethod: password
+
+  # The list of auth methods allowed to be used
+  allowedMethods:
+    - password
+    - header
+    - openid
+
+  # This block is for setting up OpenID if used
+  openid:
+    # Enable (or not) OpenID
+    enforce: false
+    # Auth method (openid or oauth2)
+    # Use oauth2 for providers like GitHub that don't fully support OpenID discovery
+    authMethod: openid
+    # The name of the provider
+    providerName: My Super Provider
+    # URL for the OpenID provider
+    discoveryUrl: https://openid-client.example.com
+    # This is for setting up the secrets (id and secret key) for the OpenID provider
+    secret:
+      # The secret name
+      name: ""
+      # The key for the OpenID client ID
+      clientIDKey: ""
+      # The key for the OpenID client Secret
+      clientSecretKey: ""
+    # The hostname of your actual instance
+    serverHostname: https://chart-example.local
+    # Controls how access tokens expire. Possible values are :
+    #   "never" (tokens never expire - current default)
+    #   "openid-provider" (tokens follow the expiration time from the OpenID provider)
+    #   A numeric value in seconds (e.g., 3600 for 1 hour)
+    tokenExpiration: never
+
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
   enabled: false
