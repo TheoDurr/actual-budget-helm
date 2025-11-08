@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "actual-budget.labels" . | nindent 4 }}
   annotations:
-  {{- if $dataStorage.keepPvc }}
+  {{- if .Values.persistence.keepPvc }}
     "helm.sh/resource-policy": keep
   {{- end }}
   {{- with .Values.persistence.annotations }}
